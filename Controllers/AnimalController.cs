@@ -60,11 +60,12 @@ namespace Petshop.Controllers
         }
 
         [HttpGet]
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
             try
             {
-                return Ok(_animalService.List());
+               var result = await _animalService.List();
+                return Ok(result);
             }
             catch (Exception e)
             {

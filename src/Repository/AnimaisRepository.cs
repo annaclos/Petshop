@@ -1,45 +1,51 @@
-﻿using Petshop.Model.Data;
+﻿using Dapper;
+using Petshop.Data;
+using Petshop.Model.Data;
 using Petshop.src.Contracts.Repository;
 
 namespace Petshop.src.Repository
 {
     public class AnimaisRepository : IAnimalRepository
     {
-        private List<Animal> animais = new List<Animal>
+        private readonly DapperContext _dapperContext;
+
+        public AnimaisRepository(DapperContext dapperContext)
         {
-            new Animal
+            _dapperContext = dapperContext;
+        }
+
+        public Task Create(Animal animal)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Animal> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<List<Animal>> List()
+        {
+            string query = @"SELECT Id,
+                           Raca,
+                           Especie
+                          FROM Animal";
+
+            using(var connection = _dapperContext.CreateConnection())
             {
-                Id = 1,
-                Raca = "chiwawa",
-                Especie = "gato"
+                var listaAnimais = await connection.QueryAsync<Animal>(query);
+                return listaAnimais.ToList();
             }
-        };
-        public void Create(Animal animal)
-        {
-            animais.Add(animal);
         }
 
-        public bool Delete(int id)
+        public Task Update(int id, Animal animal)
         {
-            var animalDB = animais.FirstOrDefault(x=>x.Id == id);
-            animais.Remove(animalDB);
-            return true;
-        }
-
-        public Animal Get(int id)
-        {
-            return animais.FirstOrDefault(x => x.Id == id)!;
-        }
-        public List<Animal> List()
-        {
-            return animais;
-        }
-
-        public void Update(int id, Animal animal)
-        {
-            var animalDB = animais.FirstOrDefault(x=>x.Id == id)!;
-            animalDB.Raca = animal.Raca;
-            animalDB.Especie = animal.Especie;
+            throw new NotImplementedException();
         }
     }
 }

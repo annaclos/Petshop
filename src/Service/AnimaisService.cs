@@ -11,29 +11,29 @@ namespace Petshop.src.Service
         {
             _animalRepository = animalRepository;
         }
-        public void Create(Animal animal)
+        public async Task Create(Animal animal)
         {
-            _animalRepository.Create(animal);
+            await _animalRepository.Create(animal);
         }
 
-        public bool Delete(int id)
+        public async Task Delete(int id)
         {
-            return _animalRepository.Delete(id);
+            await _animalRepository.Delete(id);
         }
 
-        public Animal Get(int id)
+        public async Task<Animal> Get(int id)
         {
-            return _animalRepository.Get(id);        
+           return await _animalRepository.Get(id);        
         }
 
-        public List<Animal> List()
+        public async Task<List<Animal>> List()
         {
-            return _animalRepository.List();
+           return await _animalRepository.List();
         }
 
-        public void Update(int id, Animal animal)
+        public async Task Update(int id, Animal animal)
         {
-           _animalRepository.Update(id, animal);
+            await _animalRepository.Update(id, animal);
         }
     }
 }
