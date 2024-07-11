@@ -4,10 +4,10 @@ using Petshop.src.Contracts.Service;
 
 namespace Petshop.src.Service
 {
-    public class AnimaisService : IAnimalService
+    public class AnimalService : IAnimalService
     {
         private readonly IAnimalRepository _animalRepository;
-        public AnimaisService(IAnimalRepository animalRepository) 
+        public AnimalService(IAnimalRepository animalRepository) 
         {
             _animalRepository = animalRepository;
         }
@@ -21,9 +21,14 @@ namespace Petshop.src.Service
             await _animalRepository.Delete(id);
         }
 
-        public async Task<Animal> Get(int id)
+        public async Task<Animal?> Get(int id)
         {
            return await _animalRepository.Get(id);        
+        }
+
+        public async Task<IEnumerable<Animal>> GetAnimalByCliente(int id)
+        {
+            return await _animalRepository.GetAnimalByCliente(id);
         }
 
         public async Task<List<Animal>> List()

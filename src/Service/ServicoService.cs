@@ -1,17 +1,18 @@
 ﻿using Petshop.Model.Data;
 using Petshop.src.Contracts.Repository;
 using Petshop.src.Contracts.Service;
+using Petshop.src.Repository;
 
 namespace Petshop.src.Service
 {
-    public class ServicosService : IServicosService
+    public class ServicoService : IServicoService
     {
-        private readonly IServicosRepository _servicosRepository;
-        public ServicosService(IServicosRepository servicosRepository)
+        private readonly IServicoRepository _servicosRepository;
+        public ServicoService(IServicoRepository servicosRepository)
         {
             _servicosRepository = servicosRepository;
         }
-        public void Create(Servicos servicos)
+        public void Create(Servico servicos)
         {
             _servicosRepository.Create(servicos);
         }
@@ -21,17 +22,22 @@ namespace Petshop.src.Service
             return _servicosRepository.Delete(id);
         }
 
-        public Servicos Get(int id)
+        public Servico Get(int id)
         {
             return (_servicosRepository.Get(id));
         }
 
-        public List<Servicos> List()
+        public async Task<IEnumerable<Servico>> GetServicoByCliente(int id)
+        {
+            return await _servicosRepository.GetServicoByCliente(id);
+        }
+
+        public List<Servico> List()
         {
             return _servicosRepository.List();
         }
 
-        public void Update(int id, Servicos servicos)
+        public void Update(int id, Servico servicos)
         {
             _servicosRepository.Update(id, servicos);
         }

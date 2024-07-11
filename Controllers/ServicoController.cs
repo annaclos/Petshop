@@ -2,28 +2,29 @@
 using Petshop.Model.Data;
 using Petshop.src.Contracts.Repository;
 using Petshop.src.Contracts.Service;
+using Petshop.src.Service;
 
 namespace Petshop.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ServicosController : ControllerBase
+    public class ServicoController : ControllerBase
     {
-        private readonly IServicosService _servicosService;
-        public ServicosController(IServicosService servicosService) 
-        { 
+        private readonly IServicoService _servicosService;
+        public ServicoController(IServicoService servicosService)
+        {
             _servicosService = servicosService;
         }
         [HttpPost]
-        public ActionResult Create([FromBody] Servicos servicos)
+        public ActionResult Create([FromBody] Servico servicos)
         {
             try
             {
                 _servicosService.Create(servicos);
                 return Ok("Serviço criado com sucesso");
             }
-            catch (Exception e) 
-            { 
+            catch (Exception e)
+            {
                 return BadRequest(e.Message);
             }
         }
@@ -34,8 +35,8 @@ namespace Petshop.Controllers
             {
                 return Ok(_servicosService.Delete(id));
             }
-            catch (Exception e) 
-            { 
+            catch (Exception e)
+            {
                 return BadRequest(e.Message);
             }
         }
@@ -64,12 +65,26 @@ namespace Petshop.Controllers
             }
         }
         [HttpPut]
-        public ActionResult Update([FromRoute] int id, [FromBody] Servicos servicos)
+        public ActionResult Update([FromRoute] int id, [FromBody] Servico servicos)
         {
             try
             {
                 _servicosService.Update(id, servicos);
                 return Ok("Serviço atualizado com sucesso");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("Cliente/{Id}")]
+        public async Task<ActionResult> GetServicoByClienteId([FromRoute] int Id)
+        {
+            try
+            {
+                var result = await _servicosService.GetServicoByCliente(Id);
+                return Ok(result);
             }
             catch (Exception e)
             {

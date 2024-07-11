@@ -1,10 +1,11 @@
 ﻿namespace Petshop.Model.Data
 {
-    public class Animal
+    public class Servico
     {
         public int Id { get; set; }
-        public string? Raca { get; set; }
-        public string? Especie { get; set; }
+        public string? Descricao { get; set; }
+        public decimal? Valor { get; set;}
+
         public int ClienteId { get; set; }
         public Cliente? Cliente { get; set; }
     }

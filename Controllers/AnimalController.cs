@@ -88,5 +88,19 @@ namespace Petshop.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpGet("Cliente/{Id}")]
+        public async Task<ActionResult> GetAnimalByClienteId([FromRoute] int Id)
+        {
+            try
+            {
+                var result = await _animalService.GetAnimalByCliente(Id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
