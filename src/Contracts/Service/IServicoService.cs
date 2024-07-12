@@ -4,11 +4,11 @@ namespace Petshop.src.Contracts.Service
 {
     public interface IServicoService
     {
-        void Create(Servico servicos);
-        void Update(int id, Servico servicos);
-        bool Delete(int id);
-        Servico Get(int id);
-        List<Servico> List();
+        Task Create(Servico servicos);
+        Task Update(int id, Servico servicos);
+        Task Delete(int id);
+        Task<Servico?> Get(int id);
+        Task<List<Servico>> List();
         Task<IEnumerable<Servico>> GetServicoByCliente(int id);
     }
 }

@@ -12,19 +12,19 @@ namespace Petshop.src.Service
         {
             _servicosRepository = servicosRepository;
         }
-        public void Create(Servico servicos)
+        public async Task Create(Servico servicos)
         {
-            _servicosRepository.Create(servicos);
+             await _servicosRepository.Create(servicos);
         }
 
-        public bool Delete(int id)
+        public async Task Delete(int id)
         {
-            return _servicosRepository.Delete(id);
+            await _servicosRepository.Delete(id);
         }
 
-        public Servico Get(int id)
+        public async Task<Servico?> Get(int id)
         {
-            return (_servicosRepository.Get(id));
+            return await (_servicosRepository.Get(id));
         }
 
         public async Task<IEnumerable<Servico>> GetServicoByCliente(int id)
@@ -32,14 +32,14 @@ namespace Petshop.src.Service
             return await _servicosRepository.GetServicoByCliente(id);
         }
 
-        public List<Servico> List()
+        public async Task<List<Servico>> List()
         {
-            return _servicosRepository.List();
+            return await _servicosRepository.List();
         }
 
-        public void Update(int id, Servico servicos)
+        public async Task Update(int id, Servico servicos)
         {
-            _servicosRepository.Update(id, servicos);
+            await _servicosRepository.Update(id, servicos);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Petshop.Model.Data;
 using Petshop.src.Contracts.Repository;
+using Petshop.src.Contracts.Service;
 
 namespace Petshop.Controllers
 {
@@ -8,9 +9,9 @@ namespace Petshop.Controllers
     [Route("api/[controller]")]
     public class ClienteController : ControllerBase
     {
-        private readonly IClienteRepository _clientesService;
+        private readonly IClienteService _clientesService;
 
-        public ClienteController(IClienteRepository clientes)
+        public ClienteController(IClienteService clientes)
         {
             _clientesService = clientes;
 
