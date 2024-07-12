@@ -1,23 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Petshop.Model.Data;
 using Petshop.src.Contracts.Repository;
+using Petshop.src.Contracts.Service;
 
 namespace Petshop.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ClientesController : ControllerBase
+    public class ClienteController : ControllerBase
     {
-        private readonly IClientesRepository _clientesService;
+        private readonly IClienteService _clientesService;
 
-        public ClientesController(IClientesRepository clientes)
+        public ClienteController(IClienteService clientes)
         {
             _clientesService = clientes;
 
         }
 
         [HttpPost]
-        public ActionResult Create([FromBody] Clientes clientes)
+        public ActionResult Create([FromBody] Cliente clientes)
         {
             try
             {
@@ -44,12 +45,12 @@ namespace Petshop.Controllers
             }
         }
         [HttpGet("{id}")]
-        public ActionResult Get([FromRoute] int id)
+        public async Task<ActionResult> Get([FromRoute] int id)
         {
             try
             {
-                _clientesService.Get(id);
-                return Ok(_clientesService.Get(id));
+                var result = await _clientesService.Get(id);
+                return Ok(result);
 
             }
             catch (Exception e)
@@ -58,11 +59,12 @@ namespace Petshop.Controllers
             }
         }
         [HttpGet]
-        public ActionResult List()
+        public async Task<ActionResult> List()
         {
             try
             {
-                return Ok(_clientesService.List());
+                var result = await _clientesService.List();
+                return Ok(result);
             }
             catch (Exception e)
             {
@@ -70,7 +72,7 @@ namespace Petshop.Controllers
             }
         }
         [HttpPut("{id}")]
-        public ActionResult Update([FromRoute] int id, [FromBody] Clientes clientes)
+        public ActionResult Update([FromRoute] int id, [FromBody] Cliente clientes)
         {
             try
             {
